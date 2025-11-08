@@ -1,0 +1,19 @@
+configs/.env
+__pycache__/
+*.pyc
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node / web (si tu en ajoutes plus tard)
+node_modules/
+
+# Compose / Runtime
+configs/.env
+*.env
+.meili*
+.neo4j*
+.qdrant*
+.docker/
+

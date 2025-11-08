@@ -1,0 +1,16 @@
+name: Smoke (deps+hub)
+on: { push: { branches: [ main ] }, pull_request: { branches: [ main ] } }
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compose up (deps + hub)
+        run: docker compose --profile deps up -d meili && docker compose up -d hub
+      - name: Wait for Meili
+        run: bash scripts/wait-for-http.sh http://localhost:7701/health 60
+      - name: Check Hub health
+        run: bash scripts/wait-for-http.sh http://localhost:8000/health 60
+      - name: Logs (on failure)
+        if: failure()
+        run: docker compose logs --tail=200

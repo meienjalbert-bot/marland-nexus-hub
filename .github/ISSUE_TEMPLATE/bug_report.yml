@@ -1,0 +1,15 @@
+name: Bug report
+description: Décrire un problème reproductible
+labels: [bug]
+body:
+  - type: textarea
+    id: desc
+    attributes: { label: Description, placeholder: Que se passe-t-il ? }
+    validations: { required: true }
+  - type: textarea
+    id: repro
+    attributes: { label: Reproduction, placeholder: Étapes claires pour reproduire }
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes: { label: Version/commit, placeholder: v0.1.0 ou SHA }

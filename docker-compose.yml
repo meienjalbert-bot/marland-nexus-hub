@@ -2,7 +2,7 @@ version: "3.9"
 
 x-common-env: &common_env
   MEILI_HOST: ${MEILI_HOST-http://meili:7700}
-  MEILI_MASTER_KEY: ${MEILI_MASTER_KEY-meili_key}
+  MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
   MEILI_INDEX: ${MEILI_INDEX-docs}
   QDRANT_HOST: ${QDRANT_HOST-http://qdrant:6333}
   QDRANT_COLLECTION: ${QDRANT_COLLECTION-nexus_docs}
@@ -12,6 +12,8 @@ services:
   hub:
     build: ./
     image: hub-nexus:local
+    env_file:
+      - configs/.env
     environment:
       <<: *common_env
       UVICORN_PORT: ${HUB_PORT-8000}
@@ -25,9 +27,11 @@ services:
 
   meili:
     image: getmeili/meilisearch:v1.11
+    env_file:
+      - configs/.env
     environment:
       MEILI_NO_ANALYTICS: "true"
-      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY-meili_key}
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
     ports: ["${MEILI_PORT-7700}:7700"]
     volumes:
       - meili_data:/meili_data
@@ -35,6 +39,8 @@ services:
 
   qdrant:
     image: qdrant/qdrant:v1.11.0
+    env_file:
+      - configs/.env
     ports: ["${QDRANT_PORT-6333}:6333"]
     volumes:
       - qdrant_storage:/qdrant/storage

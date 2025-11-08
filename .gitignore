@@ -1,0 +1,9 @@
+# Environnements runtime (secrets)
+configs/.env
+# Autres ignores standards
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.DS_Store

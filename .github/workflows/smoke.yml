@@ -4,7 +4,7 @@ jobs:
   smoke:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Compose up (deps + hub)
         run: docker compose --profile deps up -d meili && docker compose up -d hub
       - name: Wait for Meili
